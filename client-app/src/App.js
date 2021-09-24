@@ -5,10 +5,13 @@ import axios from "axios";
 import './bootstrap.css';
 // Source code imports
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import HomePage from "./components/HomePage";
+import EditUser from "./components/EditUser";
 import Register from "./components/Register";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AuthRoute from './components/AuthRoute';
 
 
 function App(props) {
@@ -75,6 +78,8 @@ function App(props) {
             <Route path="/" exact component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <AuthRoute path="/logout" component={Logout} />
+            <AuthRoute path="/edituser" component={EditUser} />
           </Switch>
           <Footer></Footer>
         </Router>

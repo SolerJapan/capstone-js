@@ -3,16 +3,17 @@ import React, { Component } from 'react';
 //import AuthenticationService from './AuthenticationService';
 
 //component which confirms one has been logged out
-function Logout() {
-
-    return (
-        <div>
-            <h1>logged out</h1>
-            <div className="container">
-                You Have been Logged Out
+class Logout extends Component {
+    render() {
+        return (
+            <div>
+                <h1>logged out</h1>
+                <div className="container">
+                    You Have been Logged Out
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Logout

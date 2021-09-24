@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
-//import AuthenticationService from './AuthenticationService';
-import axios from 'axios';
+//import { AUTH_API_URL } from '../Constants';
+import AuthService from './AuthService';
+//import axios from 'axios';
 //component to trigger the login and keep the state. there are various functions
 //to login on base state, or with authentication takes the username and password.
 class Login extends Component {
@@ -33,50 +33,20 @@ class Login extends Component {
     };
 
     loginClicked() {
-        console.log(this.state.username)
-        console.log(this.state.password)
 
-        const payload = {
-            username: this.state.username,
-            password: this.state.password
-        };
-        //use axios to make post request 
-        //const URL = `http://localhost:9999/v1/user-items/auth/login`;
-        axios({
-            url: 'http://localhost:9999/v1/user-items/auth/login',
-            method: 'POST',
-            data: payload
-        })
-            .then((jwt) => {
-                console.log('logged in successfully');
-                console.log(jwt);
-                this.resetUserInputs();
-                //this.getBlogPost();
-                window.localStorage.setItem("token", jwt);
-                //this.props.history.push("/");
+
+        AuthService
+            .executeJwtAuthenticationService(this.state.username, this.state.password)
+            .then((response) => {
+                console.log(this.state.username, this.state.password, response.data.token)
+                AuthService.registerSuccessfulLoginForJwt(this.state.username, response.data.id, response.data.token);
+                this.props.history.push(`/homepage`)
+            }
+
+            ).catch(() => {
+                this.setState({ showSuccessMessage: false })
+                this.setState({ hasLoginFailed: true })
             })
-            .catch(() => {
-                console.log('login failed');
-                this.props.history.push("/register");
-            });
-
-        /*  axios
-            .post(URL)
-            .then(jwt => {
-                console.log(jwt)
-
-                this.setState({ hasLoginFailed: false });
-                // save jwt to localstorage or top-level react component state
-            })
-            .catch(e => {
-                console.log(e)
-                this.setState({ hasLoginFailed: true });
-                // set login successful to false
-                // do stuff
-            }); */
-
-
-
     }
 
     render() {
@@ -85,9 +55,7 @@ class Login extends Component {
             <div>
                 <h1>Login</h1>
                 <div className="container">
-                    {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/> */}
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid User</div>}
-                    {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
                     {this.state.showSuccessMessage && <div>Success</div>}
                     UserName: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                     Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />

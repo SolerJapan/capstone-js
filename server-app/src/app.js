@@ -13,7 +13,7 @@ const UserItem = require('./api/models/user-item');
 const routes = require('./api/routes/v1');
 
 // Miscellaneos
-const USER_ITEMS = require('./test/data/user-items');
+//const USER_ITEMS = require('./test/data/user-items');
 /* 
 const db = require('db')
 db.connect({
@@ -45,7 +45,7 @@ mongoose
 
 
 // Create some test data in the database for our app
-USER_ITEMS.forEach(item => {
+/* USER_ITEMS.forEach(item => {
     const userModel = new UserItem({ username: item.username, password: item.password });
     // NOTE: If desired see here for how to make this an upsert to get rid of annoying error messages:
     // https://masteringjs.io/tutorials/mongoose/upsert
@@ -54,7 +54,7 @@ USER_ITEMS.forEach(item => {
         .catch(error => {
             console.log(`MongoDB: Error on save: `, error.errmsg);
         })
-});
+}); */
 
 /** 
  * Create and start our express server 

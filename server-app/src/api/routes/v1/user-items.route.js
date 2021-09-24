@@ -61,7 +61,7 @@ router.post('/auth/login', async (request, response) => {
 
   response
     .status(200)
-    .send({ token, username: user.username })
+    .send({ token, username: user.username, id: user._id })
 })
 
 
