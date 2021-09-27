@@ -12,6 +12,8 @@ import Register from "./components/Register";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AuthRoute from './components/AuthRoute';
+import Main from "./components/Main";
+import ErrorPage from './components/ErrorPage';
 
 
 function App(props) {
@@ -72,14 +74,16 @@ function App(props) {
         <Router>
           <Header></Header>
 
-          <h1>User App</h1>
-
           <Switch>
             <Route path="/" exact component={HomePage} />
+            <Route path="/homepage" component={HomePage} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <AuthRoute path="/logout" component={Logout} />
             <AuthRoute path="/edituser" component={EditUser} />
+            <AuthRoute path="/main" component={Main} />
+
+            <Route component={ErrorPage} />
           </Switch>
           <Footer></Footer>
         </Router>

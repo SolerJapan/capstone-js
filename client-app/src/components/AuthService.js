@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AUTH_API_URL } from '../Constants';
+import { API_URL } from '../Constants';
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 //export const PASSWORD_SESSION_ATTRIBUTE_NAME = 'authenticatedpwd'
@@ -15,6 +16,21 @@ class AuthService {
         })
 
     }
+
+    executeJwtUpdateService(username, password, id) {
+        return axios.put(`${API_URL}/${id}`, {
+            username,
+            password
+        })
+
+    }
+    executeJwtDeleteService(id) {
+        return axios.delete(`${API_URL}/${id}`, {
+
+        })
+
+    }
+
     //confirms successful login with jpa 
     registerSuccessfulLoginForJwt(username, id, token) {
         sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)

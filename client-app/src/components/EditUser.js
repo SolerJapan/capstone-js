@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //import moment from 'moment';
 
-//this links to the quiz database where questions 
-//can be added or removed.
 class EditUser extends Component {
     constructor(props) {
         super(props)
@@ -11,13 +11,18 @@ class EditUser extends Component {
             id: '',
             username: '',
             password: '',
-            hasLoginFailed: false,
+            hasUpdateFailed: null,
             showSuccessMessage: false,
             token: '',
             message: null
         }
-        //this.updateQuizClicked = this.updateQuizClicked.bind(this)
-        //this.deleteQuizClicked = this.deleteQuizClicked.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.updateClicked = this.updateClicked.bind(this)
+        this.deleteClicked = this.deleteClicked.bind(this)
+        this.submit = this.submit.bind(this)
+
+
+
 
     }
     //only to tell on console if data was unmounted
@@ -25,17 +30,62 @@ class EditUser extends Component {
         console.log('componentunMounted')
     }
 
+    submit() {
+        confirmAlert({
+            title: 'Confirm to submit',
+            message: 'Are you sure.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: this.deleteClicked,
+                },
+                {
+                    label: 'No',
+                    onClick: () => alert('Canceled')
+                }
+            ]
+        });
+    };
+
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    updateClicked() {
+        let username = AuthService.getLoggedInUserName()
+        let id = AuthService.getLoggedInID()
+
+        AuthService
+            .executeJwtUpdateService(username, this.state.password, id)
+            .then((response) => {
+                console.log(this.state.username, this.state.password, id)
+                this.setState({ showSuccessMessage: true })
+            }
+
+            ).catch(() => {
+                this.setState({ showSuccessMessage: false })
+
+            })
+    }
+
+    deleteClicked() {
+        console.log('delete')
+        let id = AuthService.getLoggedInID()
+
+        AuthService
+            .executeJwtDeleteService(id)
+        AuthService.logout()
+        window.location.reload(false);
+    }
+
+
+
     shouldComponentUpdate(nextProps, nextState) {
         console.log('shouldComponentUpdate')
         console.log(nextProps)
         console.log(nextState)
         return true
-    }
-    //only to tell on console if data was mounted and refreshes data
-    componentDidMount() {
-        console.log('componentDidMount')
-        //this.refresh();
-        console.log(this.state)
     }
 
 
@@ -45,16 +95,21 @@ class EditUser extends Component {
         let id = AuthService.getLoggedInID()
 
 
-        return <div>
-            <h1>Edit Profile</h1>
-            <h2>{this.state.id}</h2>
-            <h2>{username}</h2>
-            <h2>{id}</h2>
-            {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
-            <div className="container">
-
+        return (
+            <div>
+                <h1>Edit Profile</h1>
+                <h2>{this.state.id}</h2>
+                <h3>User: {username}</h3>
+                <br />
+                {this.state.showSuccessMessage && <div>Update Success</div>}
+                <div className="container">
+                    New Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                    <br /><br />
+                    <button className="btn btn-success mr-4" onClick={this.updateClicked}>Update</button><span></span><span></span>
+                    <button className="btn btn-danger" onClick={this.submit}>Delete</button>
+                </div>
             </div>
-        </div>
+        )
     }
 }
 

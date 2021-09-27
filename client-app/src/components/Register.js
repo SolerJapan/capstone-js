@@ -15,7 +15,7 @@ class Register extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this)
-        this.loginClicked = this.loginClicked.bind(this)
+        this.registerClicked = this.registerClicked.bind(this)
     }
     //handles event 
     handleChange(event) {
@@ -50,6 +50,7 @@ class Register extends Component {
                 //set is registered true
                 //return <Redirect to="/HomePage" />
                 //this.getBlogPost();
+                this.props.history.push(`/homepage`)
             })
             .catch(() => {
                 this.setState({ showSuccessMessage: false })
@@ -66,11 +67,13 @@ class Register extends Component {
             <div>
                 <h1>Register</h1>
                 <div className="container">
+                    <br /><br />
                     {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/> */}
                     {!this.state.showSuccessMessage && <div className="alert alert-warning">User Exists or bad connection</div>}
                     {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
-                    UserName: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-                    Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                    Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} /><br /><br />
+                    Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} /><br /><br />
+
                     <button className="btn btn-success" onClick={this.registerClicked}>Register</button>
                 </div>
             </div>

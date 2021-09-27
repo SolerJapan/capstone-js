@@ -5,7 +5,7 @@ class Footer extends Component {
     render() {
         return (
             <footer className="footer">
-                <span className="text-muted">all rights reserved </span>
+                <span className="text-primary">all rights reserved </span>
             </footer>
         )
     }
