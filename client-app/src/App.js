@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AuthRoute from './components/AuthRoute';
 import Main from "./components/Main";
+import Main2 from "./components/Main2";
 import ErrorPage from './components/ErrorPage';
 
 
@@ -82,6 +83,7 @@ function App(props) {
             <AuthRoute path="/logout" component={Logout} />
             <AuthRoute path="/edituser" component={EditUser} />
             <AuthRoute path="/main" component={Main} />
+            <AuthRoute path="/main2" component={Main2} />
 
             <Route component={ErrorPage} />
           </Switch>

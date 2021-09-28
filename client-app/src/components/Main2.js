@@ -5,18 +5,13 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //import moment from 'moment';
 
-class Main extends Component {
+class Main2 extends Component {
     constructor(props) {
         super(props)
         this.state = {
             search: '',
-            kanji: '',
-            grade: '',
-            stroke_count: '',
-            meanings: [],
-            kun_readings: [],
-            on_readings: [],
-            name_readings: [],
+            Kanji: '',
+            Words: [],
             jlpt: 0
 
         }
@@ -37,60 +32,47 @@ class Main extends Component {
 
     async getKanji() {
 
-        let url = `https://kanjiapi.dev/v1/kanji/${this.state.search}`;
+        let url = `https://kanjiapi.dev/v1/words/${this.state.search}?wordlimit=3`;
         //let url = `https://kanjiapi.dev/v1/kanji/grade-1`;
 
         let response = await fetch(url);
         let data = await response.json();
         //let num = Math.floor(Math.random() * (data.length - 0 + 1)) + 0;
         //console.log(data[num])
-        //console.log(data)
+
+        console.log('response data:', data.slice(0, 4))
+        console.log('response meanings:', data[0].meanings[0].glosses)
         //console.log(this.state.search)
 
 
         this.setState({
-            kanji: data.kanji,
-            grade: data.grade,
-            stroke_count: data.stroke_count,
-            meanings: data.meanings,
-            kun_readings: data.kun_readings,
-            on_readings: data.on_readings,
-            name_readings: data.name_readings,
-            jlpt: data.jlpt
+            Words: data
 
         });
 
     }
 
     render() {
-        let { meanings } = this.state;
-        let { kun_readings } = this.state;
-        let { on_readings } = this.state;
-        let { name_readings } = this.state;
+        const { Words } = this.state;
+        const wordSlice = Words.slice(0, 4);
 
         return (
             <div>
-                <h1>Kanji Translator</h1>
-                <h2>kanji: {this.state.kanji}</h2>
+                <h1>Kanji Word Usage</h1>
                 <br />
-                <h2>grade: {this.state.grade}</h2>
+                <h2>Words: {wordSlice.map((word, i) =>
+                    <div key={i}>
+                        {word.meanings.map((mean, j) => <div key={j}> ~ Meanings: {mean.glosses} </div>)}
+                        Variants: {word.variants.map((vari, j) => <div key={j}> ~ written: {vari.written} pronounced: {vari.pronounced}
+                        </div>)}
+                        <br /></div>)}
+                </h2>
                 <br />
-                <h2>stroke count: {this.state.stroke_count}</h2>
-                <br />
-                <h2>meanings: {meanings.map((x, i) => <data key={i}> {x} | </data>)}</h2>
-                <br />
-                <h2>kun readings: {kun_readings.map((x, i) => <data key={i}> {x} | </data>)}</h2>
-                <br />
-                <h2>on readings: {on_readings.map((x, i) => <data key={i}> {x}  | </data>)}</h2>
-                <br />
-                <h2>name readings: {name_readings.map((x, i) => <data key={i}> {x} | </data>)}</h2>
-                <br />
-                <h2>jlpt Level: {this.state.jlpt}</h2>
+
                 <br />
                 {this.state.showSuccessMessage && <div>Update Success</div>}
                 <div className="container">
                     Search: <input type="search" name="search" value={this.state.search} onChange={this.handleChange} />
-
                     <button className="btn btn-success mr-4" onClick={this.getKanji}>Search</button><span></span><span></span>
                     <br /><br /><br /><br />
                 </div>
@@ -99,4 +81,4 @@ class Main extends Component {
     }
 }
 
-export default Main;
+export default Main2;
