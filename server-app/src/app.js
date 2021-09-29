@@ -60,7 +60,7 @@ db.connect({
 
 // db config
 const DB_NAME = process.env.DB_HOST;
-const DB_URL = process.env.DB_USER;
+const DB_URL = process.env.DB_URL;
 
 /** Connect to our MongoDB database  
  **/
@@ -74,7 +74,7 @@ mongoose.connection.on('error', (error) => `MongoDB: Failed to connected to ${DB
 // We have to do this before we can save any Models to the database or get data from database.
 console.log('MongoDB: Attempting to connect ...');
 mongoose
-    .connect(process.env.ATL_DB_URL)
+    .connect(DB_URL)
     // handle error messages after successfully connectiong
     .catch(error => console.error(`MongoDB: Error ${error}`));
 
