@@ -64,7 +64,7 @@ const DB_URL = process.env.DB_USER;
 
 /** Connect to our MongoDB database  
  **/
-const PORT = process.env.DB_PORT;
+const PORT = process.env.PORT;
 
 // Configure mongoose to tell us if we succeed or if we fail to connect to the database
 mongoose.connection.on('open', () => `MongoDB: Successfully connected to ${DB_URL}`);
