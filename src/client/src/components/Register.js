@@ -1,5 +1,5 @@
 import React, { Component, Redirect } from 'react';
-import { API_URL } from '../Constants';
+
 import AuthService from './AuthService';
 import axios from 'axios';
 import dotenv from "dotenv";
