@@ -8,29 +8,10 @@ module.exports = USER_ITEMS = [
         password: 'fruit',
     },
     {
-        username: 'apple',
-        password: 'fruit',
+        username: 'cinnamon',
+        password: 'tangerine',
     },
-    {
-        username: 'pear',
-        password: 'fruit',
-    },
-    {
-        username: 'carrot',
-        password: 'vegetable',
-    },
-    {
-        username: 'zuccini',
-        password: 'vegetable',
-    },
-    {
-        username: 'tomato',
-        password: 'vegetable',
-    },
-    {
-        username: 'onion',
-        password: 'vegetable',
-    }
+
 ]
 
 module.exports = USER_ITEMS;

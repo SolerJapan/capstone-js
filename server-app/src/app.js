@@ -78,10 +78,10 @@ mongoose
     // handle error messages after successfully connectiong
     .catch(error => console.error(`MongoDB: Error ${error}`));
 
-
+// Create some test data in the database for our app
 
 //const USER_ITEMS = require('./test/data/user-items');
-// Create some test data in the database for our app
+
 /* USER_ITEMS.forEach(item => {
     const userModel = new UserItem({ username: item.username, password: item.password });
     // NOTE: If desired see here for how to make this an upsert to get rid of annoying error messages:
