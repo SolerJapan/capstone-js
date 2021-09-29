@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { KANJI_API_URL_WORDS } from '../Constants';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import dotenv from "dotenv";
 dotenv.config()
