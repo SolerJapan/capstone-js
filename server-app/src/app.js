@@ -1,7 +1,8 @@
 /** npm module imports */
 const express = require('express');
 const mongoose = require('mongoose');
-//require('dotenv').config()
+const { MongoClient } = require('mongodb');
+require('dotenv').config()
 var cors = require('cors');
 // for cors issues with
 
@@ -12,8 +13,43 @@ const UserItem = require('./api/models/user-item');
 // Routes
 const routes = require('./api/routes/v1');
 
+
+async function main() {
+
+
+
+    const uri = process.env.DB_URL;
+
+    const client = new MongoClient(uri);
+
+    try {
+        await client.connect();
+
+        await listDatabases(client);
+
+    } catch (e) {
+        console.error(e);
+    }
+    finally {
+        await client.close();
+    }
+    main().catch(console.error);
+
+}
+
+async function listDatabases(client) {
+    databasesList = await client.db().admin().listDatabases();
+
+    console.log("Databases:");
+    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+};
+
+
+
+
+
 // Miscellaneos
-//const USER_ITEMS = require('./test/data/user-items');
+
 /* 
 const db = require('db')
 db.connect({
@@ -23,12 +59,13 @@ db.connect({
 }) */
 
 // db config
-const DB_NAME = 'capstone';
-const DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
+const DB_NAME = process.env.DB_HOST;
+const DB_URL = process.env.DB_USER;
 
 /** Connect to our MongoDB database  
  **/
-const PORT = 9999;
+const PORT = process.env.DB_PORT;
+
 // Configure mongoose to tell us if we succeed or if we fail to connect to the database
 mongoose.connection.on('open', () => `MongoDB: Successfully connected to ${DB_URL}`);
 mongoose.connection.on('error', (error) => `MongoDB: Failed to connected to ${DB_URL}. Error ${error}`);
@@ -37,13 +74,13 @@ mongoose.connection.on('error', (error) => `MongoDB: Failed to connected to ${DB
 // We have to do this before we can save any Models to the database or get data from database.
 console.log('MongoDB: Attempting to connect ...');
 mongoose
-    .connect(`mongodb://localhost:27017/${DB_NAME}`)
+    .connect(process.env.ATL_DB_URL)
     // handle error messages after successfully connectiong
     .catch(error => console.error(`MongoDB: Error ${error}`));
 
 
 
-
+//const USER_ITEMS = require('./test/data/user-items');
 // Create some test data in the database for our app
 /* USER_ITEMS.forEach(item => {
     const userModel = new UserItem({ username: item.username, password: item.password });

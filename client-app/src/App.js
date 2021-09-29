@@ -68,7 +68,13 @@ function App(props) {
 
   // Data being retrieved from server
   if (!users.length) {
-    return <div>Loading</div>;
+    return (
+      <div className="App">
+
+        Loading
+      </div>
+    );
+
   } else {
     return (
       <div className="App">

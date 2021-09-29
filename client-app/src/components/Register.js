@@ -1,5 +1,5 @@
 import React, { Component, Redirect } from 'react';
-import { AUTH_API_URL } from '../Constants';
+import { API_URL } from '../Constants';
 import AuthService from './AuthService';
 import axios from 'axios';
 //component to trigger the login and keep the state. there are various functions
@@ -11,6 +11,7 @@ class Register extends Component {
             username: '',
             password: '',
             showSuccessMessage: true,
+            showRegisteredMessage: false,
             posts: []
         }
 
@@ -40,21 +41,19 @@ class Register extends Component {
         //use axios to make post request 
         //const URL = `http://localhost:9999/v1/user-items/auth/login`;
         axios({
-            url: 'http://localhost:9999/v1/user-items/',
+            url: API_URL,
             method: 'POST',
             data: payload
         })
             .then(() => {
                 console.log('registered successfully');
                 this.resetUserInputs();
-                //set is registered true
-                //return <Redirect to="/HomePage" />
-                //this.getBlogPost();
-                this.props.history.push(`/homepage`)
+                this.setState({ isRegistered: true })
+
             })
             .catch(() => {
                 this.setState({ showSuccessMessage: false })
-                //this.setState({ isRegistered: false })
+                this.setState({ isRegistered: false })
             });
 
 
@@ -70,6 +69,7 @@ class Register extends Component {
                     <br /><br />
                     {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/> */}
                     {!this.state.showSuccessMessage && <div className="alert alert-warning">User Exists or bad connection</div>}
+                    {this.state.isRegistered && <div className="alert alert-warning">User registered successfully</div>}
                     {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
                     Username: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} /><br /><br />
                     Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} /><br /><br />

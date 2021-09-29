@@ -13,7 +13,8 @@ class HomePage extends Component {
         }
 
     }
-
+    //on coming in checks if user is logged in if so it will display a random kanji and
+    //along with username
     async componentWillMount() {
         console.log('componentMounted')
         let username = AuthService.getLoggedInUserName()

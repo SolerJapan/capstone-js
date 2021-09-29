@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import AuthService from './AuthService'
-import axios from "axios";
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import { KANJI_API_URL } from '../Constants';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //import moment from 'moment';
 
@@ -34,15 +32,12 @@ class Main extends Component {
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
-
+    //searches for the kanji character
     async getKanji() {
 
-        let url = `https://kanjiapi.dev/v1/kanji/${this.state.search}`;
-        //let url = `https://kanjiapi.dev/v1/kanji/grade-1`;
-
+        let url = `${KANJI_API_URL}${this.state.search}`;
         let response = await fetch(url);
         let data = await response.json();
-        //let num = Math.floor(Math.random() * (data.length - 0 + 1)) + 0;
         //console.log(data[num])
         //console.log(data)
         //console.log(this.state.search)
@@ -68,6 +63,7 @@ class Main extends Component {
         let { on_readings } = this.state;
         let { name_readings } = this.state;
 
+        //displays the full kanji information once found
         return (
             <div>
                 <h1>Kanji Translator</h1>

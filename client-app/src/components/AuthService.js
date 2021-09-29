@@ -3,7 +3,6 @@ import { AUTH_API_URL } from '../Constants';
 import { API_URL } from '../Constants';
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
-//export const PASSWORD_SESSION_ATTRIBUTE_NAME = 'authenticatedpwd'
 export const ID_SESSION_ATTRIBUTE_NAME = 'authenticatedid'
 
 class AuthService {
@@ -34,7 +33,6 @@ class AuthService {
     //confirms successful login with jpa 
     registerSuccessfulLoginForJwt(username, id, token) {
         sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-        //sessionStorage.setItem(PASSWORD_SESSION_ATTRIBUTE_NAME, password)
         sessionStorage.setItem(ID_SESSION_ATTRIBUTE_NAME, id)
         this.setupAxiosInterceptors(this.createJWTToken(token))
     }

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import AuthService from './AuthService'
-import axios from "axios";
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import { KANJI_API_URL_WORDS } from '../Constants';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-//import moment from 'moment';
+
 
 class Main2 extends Component {
     constructor(props) {
@@ -30,19 +28,16 @@ class Main2 extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    //retrieves kanji meanings and variants
     async getKanji() {
 
-        let url = `https://kanjiapi.dev/v1/words/${this.state.search}?wordlimit=3`;
-        //let url = `https://kanjiapi.dev/v1/kanji/grade-1`;
+        let url = `${KANJI_API_URL_WORDS}${this.state.search}?wordlimit=3`;
 
         let response = await fetch(url);
         let data = await response.json();
-        //let num = Math.floor(Math.random() * (data.length - 0 + 1)) + 0;
-        //console.log(data[num])
 
         console.log('response data:', data.slice(0, 4))
         console.log('response meanings:', data[0].meanings[0].glosses)
-        //console.log(this.state.search)
 
 
         this.setState({
@@ -55,17 +50,19 @@ class Main2 extends Component {
     render() {
         const { Words } = this.state;
         const wordSlice = Words.slice(0, 4);
-
+        // outputs results if kanji found
         return (
             <div>
                 <h1>Kanji Word Usage</h1>
                 <br />
-                <h2>Words: {wordSlice.map((word, i) =>
-                    <div key={i}>
-                        {word.meanings.map((mean, j) => <div key={j}> ~ Meanings: {mean.glosses} </div>)}
-                        Variants: {word.variants.map((vari, j) => <div key={j}> ~ written: {vari.written} pronounced: {vari.pronounced}
-                        </div>)}
-                        <br /></div>)}
+                <h2>
+                    <br />
+                    {wordSlice.map((word, i) =>
+                        <div key={i}>
+                            {word.meanings.map((mean, j) => <div key={j}> ~ Meanings: {mean.glosses} </div>)}
+                            Variants: {word.variants.map((vari, j) => <div key={j}> ~ written: {vari.written} pronounced: {vari.pronounced}
+                            </div>)}
+                            <br /></div>)}
                 </h2>
                 <br />
 

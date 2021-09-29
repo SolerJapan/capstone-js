@@ -15,7 +15,7 @@ class Header extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <ul className="navbar-nav">
 
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/homepage">Home</Link></li>}
+                        <li><Link className="nav-link" to="/homepage">Home</Link></li>
                         {isUserLoggedIn && <li><Link className="nav-link" to="/edituser">Edit Profile</Link></li>}
                         {isUserLoggedIn && <li><Link className="nav-link" to="/main">Kanji Translator</Link></li>}
                         {isUserLoggedIn && <li><Link className="nav-link" to="/main2">Kanji Usage</Link></li>}

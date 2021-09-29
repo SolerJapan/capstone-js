@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import { AUTH_API_URL } from '../Constants';
 import AuthService from './AuthService';
-//import axios from 'axios';
 //component to trigger the login and keep the state. there are various functions
 //to login on base state, or with authentication takes the username and password.
 class Login extends Component {
@@ -25,6 +23,7 @@ class Login extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    //resets state 
     resetUserInputs = () => {
         this.setState({
             username: '',
@@ -32,6 +31,7 @@ class Login extends Component {
         });
     };
 
+    //responsible for logging in by managing states
     loginClicked() {
 
 
