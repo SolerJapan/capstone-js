@@ -2,6 +2,9 @@ import React, { Component, Redirect } from 'react';
 import { API_URL } from '../Constants';
 import AuthService from './AuthService';
 import axios from 'axios';
+import dotenv from "dotenv";
+dotenv.config()
+
 //component to trigger the login and keep the state. there are various functions
 //to login on base state, or with authentication takes the username and password.
 class Register extends Component {
@@ -33,7 +36,7 @@ class Register extends Component {
     registerClicked() {
         console.log(this.state.username)
         console.log(this.state.password)
-
+        const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
         const payload = {
             username: this.state.username,
             password: this.state.password
@@ -41,7 +44,7 @@ class Register extends Component {
         //use axios to make post request 
         //const URL = `http://localhost:9999/v1/user-items/auth/login`;
         axios({
-            url: API_URL,
+            url: REACT_APP_API_URL,
             method: 'POST',
             data: payload
         })

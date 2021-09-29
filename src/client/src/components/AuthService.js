@@ -1,6 +1,5 @@
 import axios from "axios";
-import { AUTH_API_URL } from '../Constants';
-import { API_URL } from '../Constants';
+
 import dotenv from "dotenv";
 dotenv.config()
 
