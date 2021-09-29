@@ -97,8 +97,16 @@ mongoose
 /** 
  * Create and start our express server 
  * **/
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 // express server config
+// IMPORTANT: Put after API routes
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 
 console.log('starting express')
@@ -114,8 +122,6 @@ app.use(express.json());
 app.use(cors());
 
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')))
 
 // For development - console each HTTP request to the server
 app.use((req, res, next) => {
@@ -139,12 +145,6 @@ app.get('/', (req, res) => {
 /** Mount all our various API routes here */
 app.use('/v1', routes);
 
-// IMPORTANT: Put after API routes
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
 
 
 /** Start express server  */
