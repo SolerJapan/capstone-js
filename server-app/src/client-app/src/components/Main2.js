@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { KANJI_API_URL_WORDS } from '../Constants';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-
+import dotenv from "dotenv";
+dotenv.config()
 
 class Main2 extends Component {
     constructor(props) {
@@ -30,8 +31,8 @@ class Main2 extends Component {
 
     //retrieves kanji meanings and variants
     async getKanji() {
-
-        let url = `${KANJI_API_URL_WORDS}${this.state.search}?wordlimit=3`;
+        const REACT_APP_KANJI_API_URL_WORDS = process.env.REACT_APP_KANJI_API_URL_WORDS
+        let url = `${REACT_APP_KANJI_API_URL_WORDS}${this.state.search}?wordlimit=3`;
 
         let response = await fetch(url);
         let data = await response.json();

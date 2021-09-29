@@ -1,15 +1,20 @@
 import axios from "axios";
 import { AUTH_API_URL } from '../Constants';
 import { API_URL } from '../Constants';
+import dotenv from "dotenv";
+dotenv.config()
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 export const ID_SESSION_ATTRIBUTE_NAME = 'authenticatedid'
+
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_AUTH_API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 class AuthService {
 
     //executes data retrieval based on jpa // from database
     executeJwtAuthenticationService(username, password) {
-        return axios.post(`${AUTH_API_URL}`, {
+        return axios.post(`${REACT_APP_AUTH_API_URL}`, {
             username,
             password
         })
@@ -17,14 +22,14 @@ class AuthService {
     }
 
     executeJwtUpdateService(username, password, id) {
-        return axios.put(`${API_URL}/${id}`, {
+        return axios.put(`${REACT_APP_API_URL}/${id}`, {
             username,
             password
         })
 
     }
     executeJwtDeleteService(id) {
-        return axios.delete(`${API_URL}/${id}`, {
+        return axios.delete(`${REACT_APP_API_URL}/${id}`, {
 
         })
 

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { KANJI_API_URL } from '../Constants';
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //import moment from 'moment';
+import dotenv from "dotenv";
+dotenv.config()
+
+
 
 class Main extends Component {
     constructor(props) {
@@ -32,10 +36,13 @@ class Main extends Component {
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
+
+
+
     //searches for the kanji character
     async getKanji() {
-
-        let url = `${KANJI_API_URL}${this.state.search}`;
+        const REACT_APP_KANJI_API_URL = process.env.REACT_APP_KANJI_API_URL;
+        let url = `${REACT_APP_KANJI_API_URL}${this.state.search}`;
         let response = await fetch(url);
         let data = await response.json();
         //console.log(data[num])

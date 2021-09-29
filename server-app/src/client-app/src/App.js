@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+//import { API_URL } from './Constants';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 import './bootstrap.css';
@@ -15,16 +16,20 @@ import AuthRoute from './components/AuthRoute';
 import Main from "./components/Main";
 import Main2 from "./components/Main2";
 import ErrorPage from './components/ErrorPage';
+import dotenv from "dotenv";
 
+dotenv.config()
 
 function App(props) {
   // create the react component state we'll use to store our data
   const [users, setUsers] = useState([]);
   const [jwt, setjwt] = useState();
 
+  const REACT_APP_API_HOST = process.env.REACT_APP_API_HOST;
+
   useEffect(() => {
     axios
-      .get("http://localhost:9999/v1/user-items/")
+      .get(REACT_APP_API_HOST)
       // handle success
       .then((response) => {
         const data = response.data;
