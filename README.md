@@ -1,6 +1,6 @@
 # Capstone-JS
 
-## Runable Build Here
+## Deployed Build Here
 
 https://capstone-kanji-reader.herokuapp.com/Login
 
