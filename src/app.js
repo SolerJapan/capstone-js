@@ -61,7 +61,7 @@ db.connect({
 
 // db config
 const DB_NAME = process.env.DB_HOST;
-const DB_URL = process.env.DB_URL;
+const DB_URL = process.env.MONGODB_URI;
 
 /** Connect to our MongoDB database  
  **/
