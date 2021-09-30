@@ -8,10 +8,10 @@ https://capstone-kanji-reader.herokuapp.com/Login
 
 ## how to use
 
-1.Go to Register and register username and address
-2.Login with the new username and address.
-3.Once logged in you can go to kanji translator or Kanji usage.
-4.you need to use a single kanji character to get results on either.
+### 1.Go to Register and register username and address
+### 2.Login with the new username and address.
+### 3.Once logged in you can go to kanji translator or Kanji usage.
+### 4.you need to use a single kanji character to get results on either.
 
 ## Credit to KanjiAPI
 
