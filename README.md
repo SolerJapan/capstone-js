@@ -80,8 +80,13 @@ This component is the center component that is first seen once one logs in a mai
 
 ### Component Main
 
-This component is the center component that is first seen once one logs in a main center page basically.
+This component serves as the main page which has the reader to translate the kanji in the search bar. This takes the kanji
+searched and brings back the results and populates it on the page
 
+### Component Main2
+
+This component serves as the second main page which has the reader call words that can be used with the kanji sent to the search bar. 
+This takes the kanji searched and brings back the meanings and variants 
 
 # Server Side
 
